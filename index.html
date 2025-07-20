@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STONORA - Hyperlocal Society Utility Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            /* Updated Color Palette */
+            --primary-green: #4CAF50;        /* Fresh green for grocery/delivery */
+            --dark-green: #388E3C;          /* Darker green for contrast */
+            --light-green: #C8E6C9;         /* Light green for backgrounds */
+            --community-orange: #FF9800;    /* Warm orange for community feel */
+            --trust-blue: #2196F3;          /* Trust-building blue */
+            --cream: #FFF9E6;               /* Soft cream for backgrounds */
+            --dark-text: #333333;           /* Main text color */
+            --light-text: #FFFFFF;          /* Text on dark backgrounds */
+            
+            /* Gradient Variables */
+            --hero-gradient: linear-gradient(135deg, rgba(76, 175, 80, 0.9) 0%, rgba(56, 142, 60, 0.9) 100%);
+            --service-gradient: linear-gradient(to bottom right, #FFF9E6 0%, #FFFFFF 100%);
+            --benefit-gradient: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+            --team-gradient: linear-gradient(to bottom right, #C8E6C9 0%, #A5D6A7 100%);
+            --contact-gradient: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%);
+            --card-gradient: linear-gradient(to bottom right, #FFFFFF 0%, #FAFAFA 100%);
+            --logo-gradient: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            --button-gradient: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            --button-hover-gradient: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            --accent-gradient: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(76, 175, 80, 0.95);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 2rem;
+            background: rgba(56, 142, 60, 0.95);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: var(--logo-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--light-text);
+            font-size: 1.8rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(15deg);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        nav ul li::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cream);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hero-gradient), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text);
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(56, 142, 60, 0.7) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .hero-content.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--button-gradient);
+            color: var(--light-text);
+            padding: 1rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn:hover {
+            background: var(--button-hover-gradient);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        .accent-btn {
+            background: var(--accent-gradient);
+        }
+
+        /* Full Page Color Sections */
+        .color-section {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-green-bg {
+            background: var(--benefit-gradient);
+            color: var(--light-text);
+        }
+
+        .light-green-bg {
+            background: var(--team-gradient);
+        }
+
+        .cream-bg {
+            background: var(--contact-gradient);
+        }
+
+        .off-white-bg {
+            background: var(--service-gradient);
+        }
+
+        /* Section Styles */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .section-title.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--community-orange);
+            border-radius: 2px;
+        }
+
+        .dark-green-bg .section-title::after {
+            background: var(--cream);
+        }
+
+        .light-green-bg .section-title::after,
+        .cream-bg .section-title::after {
+            background: var(--trust-blue);
+        }
+
+        /* Services Section */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--card-gradient);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .service-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .service-card:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+        .service-card:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+        .service-card:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+        .service-card:nth-child(5) {
+            transition-delay: 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(76, 175, 80, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            background: var(--logo-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--dark-green);
+        }
+
+        /* Benefits Section */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: flex-start;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .benefit-item.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .benefit-item:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+        .benefit-item:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+        .benefit-item:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+        .benefit-item:nth-child(5) {
+            transition-delay: 0.4s;
+        }
+        .benefit-item:nth-child(6) {
+            transition-delay: 0.5s;
+        }
+
+        .benefit-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05) !important;
+        }
+
+        .benefit-icon {
+            background: var(--logo-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            margin-top: 0.3rem;
+        }
+
+        .benefit-item h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--cream);
+        }
+
+        /* Team Section */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            background: var(--card-gradient);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transform: perspective(1000px) rotateY(90deg);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .team-member.visible {
+            transform: perspective(1000px) rotateY(0);
+            opacity: 1;
+        }
+
+        .team-member:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        .team-member:nth-child(3) {
+            transition-delay: 0.4s;
+        }
+        .team-member:nth-child(4) {
+            transition-delay: 0.6s;
+        }
+        .team-member:nth-child(5) {
+            transition-delay: 0.8s;
+        }
+
+        .team-member:hover {
+            transform: perspective(1000px) rotateY(0) translateY(-10px) !important;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .team-member img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--light-green);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+            border-color: var(--primary-green);
+        }
+
+        .team-member h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            font-size: 1.4rem;
+        }
+
+        .team-member p {
+            color: var(--dark-text);
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 249, 230, 0.8);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .contact-info.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 2rem;
+            color: var(--dark-green);
+            font-size: 1.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            margin-right: 1.5rem;
+            background: var(--logo-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            background: var(--card-gradient);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transform: translateX(50px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .contact-form.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--dark-green);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .form-group textarea {
+            height: 180px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--benefit-gradient);
+            color: var(--light-text);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            width: 70px;
+            height: 70px;
+            background: var(--logo-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--light-text);
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .footer-logo:hover {
+            transform: rotate(360deg);
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 1.8rem;
+            margin: 0 1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--logo-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        /* Color Plates (Decoration) */
+        .color-plate {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .color-plate-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--trust-blue);
+            top: -150px;
+            right: -150px;
+        }
+
+        .color-plate-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--community-orange);
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .color-plate-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-green);
+            top: 50%;
+            left: -75px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            nav {
+                width: auto;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 80px;
+                right: 2rem;
+                background: rgba(56, 142, 60, 0.95);
+                padding: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 1rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .color-section {
+                padding: 5rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info, .contact-form {
+                transform: none !important;
+            }
+
+            .color-plate {
+                display: none;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="header-container">
+            <div class="logo">S</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Full Page Image -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Revolutionizing Residential Society Services</h1>
+            <p>A fully managed utility and delivery system for just ₹250/month per flat, customized for your residents' real needs and designed for society-wide ease.</p>
+            <a href="#contact" class="btn accent-btn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Services Section - Full Page Color -->
+    <section class="color-section off-white-bg" id="services">
+        <div class="color-plate color-plate-1"></div>
+        <div class="section-container">
+            <h2 class="section-title">What Your Residents Get</h2>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Preventive Maintenance</h3>
+                    <p>Electrical & Plumbing checkups every alternate month (FREE) with dusting service every two months.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-basket"></i>
+                    </div>
+                    <h3>Grocery Delivery</h3>
+                    <p>Free grocery delivery via local kirana shops with no delivery charges.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Emergency Services</h3>
+                    <p>On-demand services at 25% cheaper than market rates with direct support access - no apps, no call center queues.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Appliance Maintenance</h3>
+                    <p>RO filter and AC maintenance/inspection included during technician visits.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Pest Control</h3>
+                    <p>Professional pest control available at 50% lower than market rate (₹800/year) with 1-year guarantee.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section - Full Page Color -->
+    <section class="color-section dark-green-bg" id="benefits">
+        <div class="color-plate color-plate-2"></div>
+        <div class="section-container">
+            <h2 class="section-title">Society Benefits</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>No Upfront Investment</h3>
+                        <p>Just ₹250/flat/month with no hidden charges.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Preventive Inspections</h3>
+                        <p>Electricity, plumbing, AC, RO checks included to avoid major breakdowns.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Reduced Committee Burden</h3>
+                        <p>Residents stop disturbing the committee or security for every small issue.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Emergency Preparedness</h3>
+                        <p>Reduces chaos during emergencies with verified technicians on standby.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Organized System</h3>
+                        <p>Society gets an organized system, not scattered vendors with inconsistent charges.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Higher Standards</h3>
+                        <p>Elevated living standards reflect in higher tenant retention and rental appreciation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section - Full Page Color -->
+    <section class="color-section light-green-bg" id="team">
+        <div class="color-plate color-plate-3"></div>
+        <div class="section-container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-container">
+                <div class="team-member">
+                    <img src="" alt="Samarth Sharma">
+                    <h3>Samarth Sharma</h3>
+                    <p>Founder & CEO</p>
+                    <p></p>
+                </div>
+                <div class="team-member">
+                    <img src="" alt="Core Member 1">
+                    <h3>Core Member 1</h3>
+                    <p></p>
+                </div>
+                <div class="team-member">
+                    <img src="" alt="Core Member 2">
+                    <h3>Core Member 2</h3>
+                    <p></p>
+                </div>
+                <div class="team-member">
+                    <img src="" alt="Core Member 3">
+                    <h3>Core Member 3</h3>
+                    <p></p>
+                </div>
+                <div class="team-member">
+                    <img src="" alt="Core Member 4">
+                    <h3>Core Member 4</h3>
+                    <p></p>
+                </div>
+                 <div class="team-member">
+                    <img src="" alt="Core Member 4">
+                    <h3>Core Member 4</h3>
+                    <p></p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section - Full Page Color -->
+    <section class="color-section cream-bg" id="contact">
+        <div class="section-container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p>Phone: 9890003000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p>Email: info@thestonora.shop</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <p>Website: www.thestonora.shop</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p>Registered as a fully compliant Private Limited company (MCA, GST, PAN, TAN done)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">S</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">© 2023 STONORA Private Limited. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Scroll animations
+        const animateOnScroll = () => {
+            // Hero content animation
+            const heroContent = document.querySelector('.hero-content');
+            if (isInViewport(heroContent)) {
+                heroContent.classList.add('visible');
+            }
+
+            // Section title animations
+            document.querySelectorAll('.section-title').forEach(title => {
+                if (isInViewport(title)) {
+                    title.classList.add('visible');
+                }
+            });
+
+            // Service card animations
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                if (isInViewport(card)) {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+
+            // Benefit item animations
+            document.querySelectorAll('.benefit-item').forEach((item, index) => {
+                if (isInViewport(item)) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+
+            // Team member animations
+            document.querySelectorAll('.team-member').forEach((member, index) => {
+                if (isInViewport(member)) {
+                    setTimeout(() => {
+                        member.classList.add('visible');
+                    }, index * 200);
+                }
+            });
+
+            // Contact animations
+            const contactInfo = document.querySelector('.contact-info');
+            const contactForm = document.querySelector('.contact-form');
+            
+            if (contactInfo && isInViewport(contactInfo)) {
+                contactInfo.classList.add('visible');
+            }
+            
+            if (contactForm && isInViewport(contactForm)) {
+                contactForm.classList.add('visible');
+            }
+        };
+
+        // Check if element is in viewport
+        const isInViewport = (element) => {
+            if (!element) return false;
+            
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight * 0.75) &&
+                rect.bottom >= (window.innerHeight * 0.25)
+            );
+        };
+
+        // Initial check on load
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+        
+        // Check on scroll
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
